@@ -33,21 +33,29 @@ public class SegmentResult {
                     JSONObject object = (JSONObject) jsonArray.get(i);
                     res[i] = object.getString("item");
                     String ne = object.optString("ne");
+                    if (object.optString("pos").equals("m")) {
+                        result.value = res[i];
+                        continue;
+                    }
+                    // Log.i("jsonArrayitem",res[i]);
                     switch (ne) {
                         case "EQUI":
-                            result.equipment = object.optString("item");
+                            // result.equipment = object.optString("item");
+                            result.equipment = res[i];
                             break;
                         case "ACT":
-                            result.action = object.optString("item");
+                            // result.action = object.optString("item");
+                            result.action = res[i];
                             break;
                         case "MODE":
-                            result.mode = object.optString("item");
+                            // result.mode = object.optString("item");
+                            result.mode = res[i];
                             break;
                     }
 
                 }
                 if(null==result.equipment){
-                    result.equipment="抱歉:)未能识别出已有设备";
+                    result.equipment = "抱歉:)未能识别出设备";
                 }
                 result.setResultRecognition(res);
             }
